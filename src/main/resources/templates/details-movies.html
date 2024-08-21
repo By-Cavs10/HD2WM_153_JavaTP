@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aliments-page</title>
 </head>
 <body>
+
+<h1>La liste des aliments</h1>
+
+<ul>
+    <li th:each="movie: ${movies}" th:text="${movie.title}"></li>
+</ul>
+
+<h3>Version Div</h3>
+
+<div th:each="movie : ${movies}" >
+    <p th:text="${movie.title}"></p>
+</div>
 
 </body>
 </html>

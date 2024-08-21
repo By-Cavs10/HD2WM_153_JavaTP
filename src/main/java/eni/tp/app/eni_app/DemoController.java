@@ -1,10 +1,16 @@
 package eni.tp.app.eni_app;
 
+import eni.tp.app.eni_app.bll.ArticleManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 
 @Controller
 public class DemoController {
+
+    @Autowired
+    ArticleManager articleManager;
 
     //cholatine est l'URL soit le html
     @GetMapping("moviestream")
@@ -24,7 +30,9 @@ public class DemoController {
         return "hello-page" ;
     }
     @GetMapping("details-movies")
-    public String detailsMovies(){
+    public String detailsMovies(Model model){
+
+        model.addAttribute("movies", articleManager.getMovies());
 
         return "details-movies" ;
     }
