@@ -8,13 +8,15 @@ public class Movie {
     public int duration;
     public String synopsis;
     public int note = 2;
+    public String photo;
 
-    public Movie(long id, String title, int year, int duration, String synopsis) {
+    public Movie(long id, String title, int year, int duration, String synopsis, String photo) {
         this.id = id;
         this.title = title;
         this.year = year;
         this.duration = duration;
         this.synopsis = synopsis;
+        this.photo = photo;
     }
 
     public int getNote() {

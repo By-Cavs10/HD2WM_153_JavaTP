@@ -1,10 +1,12 @@
 package eni.tp.app.eni_app;
 
 import eni.tp.app.eni_app.bll.ArticleManager;
+import eni.tp.app.eni_app.bo.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,13 +34,8 @@ public class DemoController {
 
         return "hello-page" ;
     }
-    @GetMapping("details-movies")
-    public String detailsMovies(Model model){
 
-        model.addAttribute("movies", articleManager.getMovies());
 
-        return "details-movies" ;
-    }
     @GetMapping("list-movies")
     public String listMovies(Model model){
         model.addAttribute("movies", articleManager.getMovies());
@@ -47,6 +44,27 @@ public class DemoController {
         List<Integer> maxStar = Arrays.asList(1, 2, 3, 4, 5);
         model.addAttribute("maxStars", maxStar);
         return "list-movies" ;
+    }
+
+    @GetMapping("details-movies/{id}")
+
+    public String showArticle(@PathVariable("id")long id, Model model){
+        //Récupérer l'aliment via le manager avec omme paramètre l'id provenant de la requête (URL)
+        Movie movie = articleManager.getById(id);
+
+        if(movie == null){
+            //Afficher la page erreur qui s'appelle aliment-not-found
+            return "movie-not-found" ;
+        }
+
+        //Envoyer l'aliment trouvé dans la vue (dans le modèle)
+        model.addAttribute("movie", movie);
+
+        //Afficher la page detail aliment
+        return "details-movies" ;
+
+
+
     }
 }
 

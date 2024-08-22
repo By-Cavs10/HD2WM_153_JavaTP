@@ -9,4 +9,6 @@ public interface IDAOMovie {
 
     public List<Movie> selectMovie();
 
+    Movie selectMovieById(long id);
+
 }

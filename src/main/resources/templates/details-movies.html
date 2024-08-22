@@ -7,17 +7,15 @@
 </head>
 <body>
 
-<h1>La liste des aliments</h1>
 
-<ul>
-    <li th:each="movie: ${movies}" th:text="${movie.title}"></li>
-</ul>
 
-<h3>Version Div</h3>
+<h2>Detail du film</h2>
 
-<div th:each="movie : ${movies}" >
-    <p th:text="${movie.title}"></p>
-</div>
+<p th:text="${movie.title}"></p>
+<img th:src="@{${movie.photo}}"/>
+<p th:text="${movie.duration}"></p>
+<p th:text="${movie.note}"></p>
+<p th:text="${movie.synopsis}"></p>
 
 </body>
 </html>
