@@ -17,6 +17,8 @@ public class DAOMock implements IDAOMovie {
             //Initialiser une fausse liste d'aliments
             List<Movie> movies = new ArrayList<Movie>();
             movies.add(new Movie(25, "Chauve-Souris", 1995, 120, "mieux que batman" ));
+            movies.add(new Movie(25, "Chauve Man", 2023, 102, "le chauve fort" ));
+
             //aliments.add(new Aliment("Beurre Salé"));
             return movies;
         }

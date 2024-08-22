@@ -6,6 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 public class DemoController {
 
@@ -37,8 +40,12 @@ public class DemoController {
         return "details-movies" ;
     }
     @GetMapping("list-movies")
-    public String listMovies(){
+    public String listMovies(Model model){
+        model.addAttribute("movies", articleManager.getMovies());
 
+        //Envoyer la note maximale
+        List<Integer> maxStar = Arrays.asList(1, 2, 3, 4, 5);
+        model.addAttribute("maxStars", maxStar);
         return "list-movies" ;
     }
 }

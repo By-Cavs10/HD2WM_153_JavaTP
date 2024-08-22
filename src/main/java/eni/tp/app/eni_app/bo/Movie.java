@@ -7,6 +7,7 @@ public class Movie {
     public int year;
     public int duration;
     public String synopsis;
+    public int note = 2;
 
     public Movie(long id, String title, int year, int duration, String synopsis) {
         this.id = id;
@@ -14,6 +15,12 @@ public class Movie {
         this.year = year;
         this.duration = duration;
         this.synopsis = synopsis;
+    }
+
+    public int getNote() {
+        //Plus tatd quand on va supprimer le int note
+        //La note sera la moyenne des avis
+        return note;
     }
 }
 
