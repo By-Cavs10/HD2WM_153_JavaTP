@@ -19,7 +19,11 @@
                     </div>
                     <p class="eni-desc" th:text="${movie.synopsis}"></p>
                 </div>
+                <!--On aurait pu aussi écrire le a différemment
+                <a class="eni-movie-card-click" th:href="@{'/details-movies/' + ${movie.id}}">
+                -->
                 <a class="eni-movie-card-click" th:href="@{/details-movies/{id}(id=${movie.id})}">
+                    // o,
                 </a>
             </div>
         </div>

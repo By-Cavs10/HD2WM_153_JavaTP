@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/base}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+
+<body>
+<title layout:fragment="title">Détails</title>
+<div layout:fragment="content">
+
+
+    <body class="eni-page-background">
+
+    <div class="eni-common-page-padding">
+
+
+        <h1 class="uk-heading-divider uk-text-center">Login</h1>
+
+        <form th:object="${member}" method="post" action="/login">
+
+            <input th:field="*{email}" class="uk-input" placeholder="saisir l'email">
+            <input th:field="*{password}" class="uk-input" placeholder="saisir le mot de passe" type="password"/>
+
+            <div class="uk-margin">
+                <input value="Submit" type="submit" class="uk-button uk-button-primary"/>
+            </div>
+
+        </form>
+    </div>
+    </body>
+</html>

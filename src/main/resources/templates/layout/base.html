@@ -42,26 +42,48 @@
             </div>
 
             <div class="uk-navbar-center">
-                <a class="uk-navbar-item uk-logo" href="#">
+                <a class="uk-navbar-item uk-logo" href="home">
                     <img src="/logo.png" class="eni-navbar-logo" alt="Logo">
                 </a>
             </div>
 
-            <div class="uk-navbar-right eni-navbar-btn-padding">
-                <a class="uk-icon-button" href="#"><i class="fas fa-sign-in-alt"></i></a>
-            </div>
+<!--            <div class="uk-navbar-right eni-navbar-btn-padding">-->
+<!--                <a class="uk-icon-button" href="/login"><i class="fas fa-sign-in-alt"></i></a>-->
+<!--            </div>-->
+
+            <!-- Afficher le bouton se connecter si loggedUser est null (donc si pas connecté)-->
+            <a th:if="${loggedMember == null}" class="uk-icon-button uk-navbar-right eni-navbar-btn-padding" href="/login"><i class="fas fa-sign-in-alt"></i></a>
+
+            <!-- Afficher le bouton se déconnecter si loggedUser est null (donc si connecté)-->
+            <a th:if="${loggedMember}" class="uk-icon-button uk-navbar-right eni-navbar-btn-padding" href="/logout"><i class="fas fa-door-open"></i></a>
         </nav>
         <div id="offcanvas-nav" uk-offcanvas="mode: reveal; overlay: true">
             <div class="uk-offcanvas-bar">
                 <ul class="uk-nav uk-nav-default">
-                    <li class="uk-active"><a href="#">Accueil</a></li>
+                    <li class="uk-active"><a href="home">Accueil</a></li>
                     <li><a href="#">À propos</a></li>
                     <li><a href="#">Contact</a></li>
+                    <li><a href="list-movies">Liste Films</a></li>
+
                 </ul>
             </div>
         </div>
     </div>
+
+    <!-- Flash message conditionnel -->
+    <!-- Affiche un message temporaire si il existe -->
+    <div th:if="${flashMessage}" class="uk-padding-small">
+        <div th:classappend="${flashMessage.getTypeCssClass()}" uk-alert>
+            <a href class="uk-alert-close" uk-close></a>
+            <p th:text="${flashMessage.message}"></p>
+        </div>
+    </div>
+
+
 </header>
+
+
+
 <div layout:fragment="content"  >
 
 </div>
