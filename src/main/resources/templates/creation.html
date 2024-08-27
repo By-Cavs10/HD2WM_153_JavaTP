@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/base}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+
+
+<body class="eni-page-background">
+<title layout:fragment="title">Creation</title>
+<div layout:fragment="content">
+
+
+  <form th:object="${movie}" method="post" action="/creation">
+
+
+    <div class="uk-margin">
+      <label class="uk-form-label" for="title">Saisir le titre du film</label>
+      <div class="uk-form-controls">
+        <input th:field="*{title}" class="uk-input" type="text" placeholder="titre">
+        <ul th:if="${#fields.hasErrors('title')}">
+          <li class="uk-form-danger" th:each="error: ${#fields.errors('title')}" th:text="${error}"></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="uk-margin">
+      <label class="uk-form-label" for="year">Saisir l'année du film</label>
+      <div class="uk-form-controls">
+        <input th:field="*{year}" class="uk-input" type="number" placeholder="année">
+        <ul th:if="${#fields.hasErrors('year')}">
+          <li class="uk-form-danger" th:each="error: ${#fields.errors('year')}" th:text="${error}"></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="uk-margin">
+      <label class="uk-form-label" for="duration">Saisir la durée du film</label>
+      <div class="uk-form-controls">
+        <input th:field="*{duration}" class="uk-input" type="number" placeholder="durée en min">
+        <ul th:if="${#fields.hasErrors('duration')}">
+          <li class="uk-form-danger" th:each="error: ${#fields.errors('duration')}" th:text="${error}"></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="uk-margin">
+      <label class="uk-form-label" for="synopsis">Synopsis du film</label>
+      <div class="uk-form-controls">
+        <input th:field="*{synopsis}" class="uk-textarea" type="text" placeholder="synopsis">
+      </div>
+    </div>
+
+    <div class="uk-margin">
+      <label class="uk-form-label" for="photo">Entrer l'url de la photo du film</label>
+      <div class="uk-form-controls">
+        <input th:field="*{photo}" class="uk-input" type="text" placeholder="URL">
+      </div>
+    </div>
+
+    <div class="uk-margin">
+      <input value="Submit" type="submit" class="uk-button uk-button-primary"/>
+    </div>
+
+  </form>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+</body>
+</html>
