@@ -2,15 +2,19 @@ package eni.tp.app.eni_app;
 
 import eni.tp.app.eni_app.bll.ArticleManager;
 import eni.tp.app.eni_app.bo.Movie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.LocaleResolver;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 @SessionAttributes({"loggedMember"})
 @Controller
@@ -18,6 +22,23 @@ public class DemoController {
 
     @Autowired
     ArticleManager articleManager;
+
+    @Autowired
+    LocaleResolver localeResolver;
+
+    @GetMapping("change-lang/{lang}")
+    public String changeLang (@PathVariable ("lang") String lang, HttpServletRequest request,
+                              HttpServletResponse response) {
+
+        //Instancier la clé de la langue
+        Locale locale = Locale.forLanguageTag(lang);
+
+        //Appliquer la langue
+        localeResolver.setLocale(request, response,locale);
+
+        //rediriger
+        return "redirect:/home";
+    }
 
     //cholatine est l'URL soit le html
     @GetMapping("moviestream")

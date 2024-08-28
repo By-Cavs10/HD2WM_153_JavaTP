@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Profile("mock")
 @Component
 public class DAOMock implements IDAOMovie {
 
@@ -30,6 +31,11 @@ public class DAOMock implements IDAOMovie {
         Movie movieToFound = movies.stream().filter(movie -> movie.id == id).findFirst().orElse(null);
 
         return movieToFound;
+    }
+
+    @Override
+    public void saveMovie(Movie movie) {
+
     }
 
 }

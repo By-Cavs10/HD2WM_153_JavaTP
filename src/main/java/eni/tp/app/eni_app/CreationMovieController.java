@@ -1,9 +1,11 @@
 package eni.tp.app.eni_app;
 
+import eni.tp.app.eni_app.bll.ArticleManager;
 import eni.tp.app.eni_app.bo.Member;
 import eni.tp.app.eni_app.bo.Movie;
 import eni.tp.app.eni_app.ihm.EniIHMHelpers;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CreationMovieController {
 
 
-
+    @Autowired
+    ArticleManager articleManager;
 
 
         @GetMapping("creation")
@@ -52,10 +55,12 @@ public class CreationMovieController {
             //Obectif tester la validité de la donnée (ontrôle de surface)
             if(bindingResult.hasErrors()){
                 System.out.println("Erreur de contrôle surface");
-vb                  return "/creation";
+                  return "/creation";
             }
 
             //Todo : on sauvegarde l'aliment dans la BDD
+
+            articleManager.saveMovie(movie);
 
             System.out.println(String.format("Le film %s a été sauvegardé", movie.title));
 

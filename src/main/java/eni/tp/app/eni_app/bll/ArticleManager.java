@@ -11,31 +11,38 @@ import java.util.List;
 public class ArticleManager {
 
 
+    @Autowired
+    IDAOMovie daoMovie;
 
-        @Autowired
-        IDAOMovie daoMovie;
-
-        /**
-         * Le manager qui récupère la liste des Aliments
-         * @return
-         */
+    /**
+     * Le manager qui récupère la liste des Aliments
+     *
+     * @return
+     */
 
 
-        public List<Movie> getMovies(){
+    public List<Movie> getMovies() {
 
-            //Récupère la couche DAO
-            // IDAOAliment daoAliment = FactoryDAO.getDAOAliment();
+        //Récupère la couche DAO
+        // IDAOAliment daoAliment = FactoryDAO.getDAOAliment();
 
-            //récupérer les aliments de la DAO
-            List<Movie> movies = daoMovie.selectMovie();
+        //récupérer les aliments de la DAO
+        List<Movie> movies = daoMovie.selectMovie();
 
-            return movies;
-        }
+        return movies;
+    }
 
-    public Movie getById(long id){
+    public Movie getById(long id) {
 
         Movie movie = daoMovie.selectMovieById(id);
 
         return movie;
     }
+
+    //Appelera la DAO pour sauvegarder un Aliment
+    //@param aliment
+    public void saveMovie(Movie movie) {
+        daoMovie.saveMovie(movie);
+    }
+
 }

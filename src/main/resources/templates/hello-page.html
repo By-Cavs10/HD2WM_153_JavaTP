@@ -7,11 +7,15 @@
 <body>
 <title layout:fragment="title">Home</title>
 <div layout:fragment="content">
+
+    <h1 th:text="#{title.home}"></h1>
+    <h2 th:text="#{message.welcome}"></h2>
     <div class="nav-link">
         <h2>Accède en cliquant sur le chauve ci dessous à la liste des films</h2>
     </div>
 
-    <div>
+
+    <div class="uk-margin uk-width-1-5 uk-align-center">
         <a href="list-movies"> <img src="vin-bretzel.png"> <a/>
     </div>
 </div>
