@@ -67,16 +67,19 @@ public class DAOMySQL implements IDAOMovie {
     public void saveMovie(Movie movie) {
 
         //Tester si il existe en base, SI OUI => Update SINON => Insert
-//        if (selectMovieById(movie.id) != null) {
-//            jdbcTemplate.update("UPDATE movie SET id = ? WHERE id = ?", movie.getId(), movie.getId());
+        if (movie.getId() != null && selectMovieById(movie.getId()) != null) {
+            jdbcTemplate.update("UPDATE movie SET title = ?, note = ?, year = ?, duration = ?, synopsis = ?,photo = ? WHERE id = ?"
+                    , movie.title, movie.note, movie.year, movie.duration, movie.synopsis, movie.photo, movie.id);
+
+            //PS : Return = Arreter la fonction
+            return;
 //
-//            //PS : Return = Arreter la fonction
-//            return;
-//
-//        }
+        }
 
         //Insérer en base un aliment
-        jdbcTemplate.update("INSERT INTO movie(id, title, note, year, duration, synopsis, photo ) VALUES (?,?,?,?,?,?,?)", movie.id, movie.title, movie.note, movie.year, movie.duration, movie.synopsis, movie.photo);
+        jdbcTemplate.update("INSERT INTO movie(id, title, note, year, duration, synopsis, photo ) VALUES (?,?," +
+                        "?,?,?,?,?)", movie.id, movie.title, movie.note, movie.year, movie.duration,
+                movie.synopsis, movie.photo);
 
     }
 }

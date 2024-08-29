@@ -11,7 +11,10 @@
 
   <form th:object="${movie}" method="post" action="/creation">
 
+<!--ID Caché -->
+    <input th:field="*{id}" type="hidden">
 
+<!--Title-->
     <div class="uk-margin">
       <label class="uk-form-label" for="title">Saisir le titre du film</label>
       <div class="uk-form-controls">
@@ -22,6 +25,7 @@
       </div>
     </div>
 
+<!--Year-->
     <div class="uk-margin">
       <label class="uk-form-label" for="year">Saisir l'année du film</label>
       <div class="uk-form-controls">
@@ -32,6 +36,7 @@
       </div>
     </div>
 
+<!--Duration-->
     <div class="uk-margin">
       <label class="uk-form-label" for="duration">Saisir la durée du film</label>
       <div class="uk-form-controls">
@@ -42,6 +47,8 @@
       </div>
     </div>
 
+
+<!--Synopsis-->
     <div class="uk-margin">
       <label class="uk-form-label" for="synopsis">Synopsis du film</label>
       <div class="uk-form-controls">
@@ -49,6 +56,8 @@
       </div>
     </div>
 
+
+<!--Photo URL-->
     <div class="uk-margin">
       <label class="uk-form-label" for="photo">Entrer l'url de la photo du film</label>
       <div class="uk-form-controls">

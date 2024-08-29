@@ -4,7 +4,7 @@ import jakarta.validation.constraints.*;
 
 public class Movie {
 
-    public long id;
+    public Long id;
 
     @NotBlank(message = "Le titre doit être renseigné")
     public String title;
@@ -25,7 +25,7 @@ public class Movie {
 
     public Movie(){}
 
-    public Movie(long id, String title, int year, int duration, String synopsis, String photo) {
+    public Movie(Long id, String title, int year, int duration, String synopsis, String photo) {
         this.id = id;
         this.title = title;
         this.year = year;
@@ -68,11 +68,11 @@ public class Movie {
         return photo;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

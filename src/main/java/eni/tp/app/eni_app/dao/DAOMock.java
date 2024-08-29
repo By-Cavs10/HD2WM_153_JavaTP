@@ -13,10 +13,10 @@ import java.util.List;
 public class DAOMock implements IDAOMovie {
 
 
-
+//
             List<Movie> movies = Arrays.asList(
-                new Movie(1, "Chauve-Souris", 1995, 120, "mieux que batman", "/chauve-qui-peut.png" ),
-                new Movie(2 , "Chauve Man", 2023, 102, "le chauve fort","/chauve-qui-peut-v2.png" ));
+                new Movie("Chauve-Souris", 1995, 120, "mieux que batman", "/chauve-qui-peut.png" ),
+                new Movie( "Chauve Man", 2023, 102, "le chauve fort","/chauve-qui-peut-v2.png" ));
 
     @Override
     public List<Movie> selectMovie() {
@@ -25,9 +25,14 @@ public class DAOMock implements IDAOMovie {
 
     }
 
-
     @Override
     public Movie selectMovieById(long id) {
+        return null;
+    }
+
+
+
+    public Movie selectMovieById(Long id) {
         Movie movieToFound = movies.stream().filter(movie -> movie.id == id).findFirst().orElse(null);
 
         return movieToFound;
