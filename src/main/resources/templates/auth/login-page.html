@@ -18,6 +18,10 @@
         <form th:object="${member}" method="post" action="/login">
 
             <input th:field="*{email}" class="uk-input" placeholder="saisir l'email">
+            <ul th:if="${#fields.hasErrors('email')}">
+                <li class="uk-form-danger" th:each="error: ${#fields.errors('email')}" th:text="${error}"></li>
+            </ul>
+
             <input th:field="*{password}" class="uk-input" placeholder="saisir le mot de passe" type="password"/>
 
             <div class="uk-margin">

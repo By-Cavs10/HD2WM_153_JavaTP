@@ -1,13 +1,21 @@
 package eni.tp.app.eni_app.bo;
 
+import jakarta.validation.constraints.Email;
+
 public class Member extends Person {
 
+    @Email
     public String email;
     public String password;
     public boolean isAdmin;
 
 
     public Member (){}
+
+    public Member(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
 
     public Member(long id, String firstname, String lastname, String email, String password) {

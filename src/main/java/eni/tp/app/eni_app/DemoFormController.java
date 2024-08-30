@@ -1,12 +1,16 @@
 package eni.tp.app.eni_app;
 
 import eni.tp.app.eni_app.bll.ArticleManager;
+import eni.tp.app.eni_app.bll.AuthManager;
+import eni.tp.app.eni_app.bll.EniManagerResponse;
 import eni.tp.app.eni_app.bo.Member;
 import eni.tp.app.eni_app.ihm.EniFlashMessage;
 import eni.tp.app.eni_app.ihm.EniIHMHelpers;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +23,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class DemoFormController {
 
 
+    private final AuthManager authManager;
 
-        @GetMapping("login")
+    public DemoFormController(AuthManager authManager) {
+        this.authManager = authManager;
+    }
+
+    @GetMapping("login")
         public String showLoginForm(Model model) {
 
             //tester si déjà connecté
@@ -45,8 +54,30 @@ public class DemoFormController {
 
 
         @PostMapping("login")
-        public String loginForm(@ModelAttribute("member") Member member, Model model, RedirectAttributes redirectAttributes) {
+        public String loginForm(@Valid @ModelAttribute(name ="member") Member member, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 
+            //1 : Contrôle de Surface
+            if(bindingResult.hasErrors()) {
+                //Retourner la page avec les erreurs de validation ( le format)
+                return "auth/login-page";
+            }
+
+            //Erreur : Si Contrôle de Surface
+            //TODO : Retourner la page avec les erreurs de validation (le format)
+
+
+            //2 : Contrôle Métier (le manager)
+            EniManagerResponse<Member> response = authManager.authenticate(member.email, member.password);
+
+            //Erreur code 756 retourner la page avec l'erreur métier
+            if (response.code.equals("756")){
+                return "auth/account";
+            }
+
+
+
+            //3: Connecter l'user en session
+            //Mettre l'user dans la session
             model.addAttribute ("loggedMember", member);
 
 
