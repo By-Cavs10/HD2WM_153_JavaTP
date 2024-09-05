@@ -22,6 +22,8 @@ public class Movie {
     public int note = 2;
     public String photo;
 
+    private Genre genre;
+
 
     public Movie(){}
 
@@ -40,6 +42,11 @@ public class Movie {
         this.duration = duration;
         this.synopsis = synopsis;
         this.photo = photo;
+    }
+
+    public Movie(String title, int year, int duration, String synopsis, String photo, Genre genre) {
+        this(title, year, duration, synopsis, photo);
+        this.genre = genre;
     }
 
     public int getNote() {
@@ -98,6 +105,28 @@ public class Movie {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", year=" + year +
+                ", duration=" + duration +
+                ", synopsis='" + synopsis + '\'' +
+                ", note=" + note +
+                ", photo='" + photo + '\'' +
+                ", genre=" + genre +
+                '}';
     }
 }
 

@@ -9,7 +9,7 @@
 <div layout:fragment="content">
 
 
-  <form th:object="${movie}" method="post" action="/creation">
+  <form th:object="${movie}" method="post" th:action="@{/creation}">
 
 <!--ID Caché -->
     <input th:field="*{id}" type="hidden">
@@ -64,6 +64,13 @@
         <input th:field="*{photo}" class="uk-input" type="text" placeholder="URL">
       </div>
     </div>
+
+      <div class="uk-margin">
+          <select th:field="*{genre}">
+              <!--                <option value="0">Choisissez une catégorie</option>-->
+              <option th:each="gen : ${genres}" th:value="${gen.id}" th:text="${gen.titre}">Quel est le genre</option>
+          </select>
+      </div>
 
     <div class="uk-margin">
       <input value="Submit" type="submit" class="uk-button uk-button-primary"/>

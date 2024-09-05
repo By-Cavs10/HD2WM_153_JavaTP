@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
 <head>
+    <link rel="icon" th:href="@{/images/login-icon.png}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- UIkit CSS -->
@@ -18,8 +19,8 @@
           integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
 
     <!-- My Theme -->
-    <link rel="stylesheet" href="/eni-theme.css"/>
-    <link rel="stylesheet" href="/eni-movie-detail.css"/>
+    <link rel="stylesheet" th:href="@{/css/eni-theme.css}"/>
+    <link rel="stylesheet" th:href="@{/css/eni-movie-details.css}"/>
 
     <meta charset="UTF-8">
     <title layout:fragment="title">Title</title>
@@ -43,7 +44,7 @@
 
             <div class="uk-navbar-center">
                 <a class="uk-navbar-item uk-logo" href="/home">
-                    <img src="/logo.png" class="eni-navbar-logo" alt="Logo">
+                    <img src="/images/logo.png" class="eni-navbar-logo" alt="Logo">
                 </a>
             </div>
 
@@ -52,11 +53,19 @@
 <!--            </div>-->
 
             <!-- Afficher le bouton se connecter si loggedUser est null (donc si pas connecté)-->
-            <a th:if="${loggedMember == null}" class="uk-icon-button uk-navbar-right eni-navbar-btn-padding" href="/login"><i class="fas fa-sign-in-alt"></i></a>
+<!--            <a th:if="${loggedMember == null}" class="uk-icon-button uk-navbar-right eni-navbar-btn-padding" th:href="@{/login}"><i class="fas fa-sign-in-alt"></i></a>-->
+                <a sec:authorize="!isAuthenticated()" class="uk-icon-button uk-navbar-right eni-navbar-btn-padding" th:href="@{/login}"><i class="fas fa-sign-in-alt"></i></a>
 
             <!-- Afficher le bouton se déconnecter si loggedUser est null (donc si connecté)-->
-            <a th:if="${loggedMember}" class="uk-icon-button uk-navbar-right eni-navbar-btn-padding" href="/logout"><i class="fas fa-door-open"></i></a>
+<!--            <a th:if="${loggedMember}" class="uk-icon-button uk-navbar-right eni-navbar-btn-padding" th:href="@{/logout}"><i class="fas fa-door-open"></i></a>-->
+            <a sec:authorize="isAuthenticated()" class="uk-icon-button uk-navbar-right eni-navbar-btn-padding" th:href="@{/logout}"><i class="fas fa-door-open"></i></a>
+
         </nav>
+        <div sec:authorize="isAuthenticated()">
+            Logged user: <span sec:authentication="name"></span>
+            Roles: <span sec:authentication="principal.authorities"></span>
+        </div>
+
         <div id="offcanvas-nav" uk-offcanvas="mode: reveal; overlay: true">
             <div class="uk-offcanvas-bar">
                 <ul class="uk-nav uk-nav-default">
@@ -64,7 +73,10 @@
                     <li><a href="#">À propos</a></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="/list-movies">Liste Films</a></li>
-                    <li><a href="/creation">Ajout Film</a></li>
+                    <li  sec:authorize="hasRole('ADMIN')"><a th:href="@{/creation}">Ajout Film</a></li>
+                    <li  sec:authorize="!isAuthenticated()"><a th:href="@{/login}"> Connexion</a></li>
+                    <li  sec:authorize="isAuthenticated()"><a th:href="@{/logout}"> Déconnexion</a></li>
+                    <li  sec:authorize="isAuthenticated()"><a th:href="@{/manage}"> Manage</a></li>
 
                 </ul>
             </div>

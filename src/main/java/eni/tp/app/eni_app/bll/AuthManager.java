@@ -1,7 +1,7 @@
 package eni.tp.app.eni_app.bll;
 
 import eni.tp.app.eni_app.bo.Member;
-import eni.tp.app.eni_app.dao.IDAOAuth;
+import eni.tp.app.eni_app.dao.members.IDAOAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,4 +25,5 @@ public class AuthManager {
         //Sinon code 200
         return EniManagerResponse.performResponse("200", "Vous êtes connecté(e)s avec succès", null);
     }
+
 }

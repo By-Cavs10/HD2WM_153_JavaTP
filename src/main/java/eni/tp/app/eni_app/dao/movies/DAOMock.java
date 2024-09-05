@@ -1,10 +1,9 @@
-package eni.tp.app.eni_app.dao;
+package eni.tp.app.eni_app.dao.movies;
 
 import eni.tp.app.eni_app.bo.Movie;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

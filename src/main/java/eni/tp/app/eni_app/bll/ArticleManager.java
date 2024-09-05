@@ -1,7 +1,7 @@
 package eni.tp.app.eni_app.bll;
 
 import eni.tp.app.eni_app.bo.Movie;
-import eni.tp.app.eni_app.dao.IDAOMovie;
+import eni.tp.app.eni_app.dao.movies.IDAOMovie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

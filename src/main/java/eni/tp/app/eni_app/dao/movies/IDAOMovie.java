@@ -1,4 +1,4 @@
-package eni.tp.app.eni_app.dao;
+package eni.tp.app.eni_app.dao.movies;
 
 import eni.tp.app.eni_app.bo.Movie;
 

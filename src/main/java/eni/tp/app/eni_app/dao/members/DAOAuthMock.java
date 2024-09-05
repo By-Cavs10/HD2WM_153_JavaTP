@@ -1,11 +1,13 @@
-package eni.tp.app.eni_app.dao;
+package eni.tp.app.eni_app.dao.members;
 
 import eni.tp.app.eni_app.bo.Member;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
 
+@Profile("mock")
 @Component
 public class DAOAuthMock implements IDAOAuth{
 
@@ -24,5 +26,30 @@ public class DAOAuthMock implements IDAOAuth{
 
 
         return foundMember;
+    }
+
+    @Override
+    public List<Member> selectMovie() {
+        return List.of();
+    }
+
+    @Override
+    public List<Member> selectMember() {
+        return List.of();
+    }
+
+    @Override
+    public Member selectMemberById(long id) {
+        return null;
+    }
+
+    @Override
+    public void saveMember(Member member) {
+
+    }
+
+    @Override
+    public void deleteById(Member member) {
+
     }
 }

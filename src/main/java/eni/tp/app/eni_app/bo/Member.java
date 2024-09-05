@@ -1,7 +1,9 @@
 package eni.tp.app.eni_app.bo;
 
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
 
+@Entity
 public class Member extends Person {
 
     @Email

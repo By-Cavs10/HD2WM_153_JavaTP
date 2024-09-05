@@ -1,22 +1,25 @@
-package eni.tp.app.eni_app;
+package eni.tp.app.eni_app.ihm;
 
 import eni.tp.app.eni_app.bll.ArticleManager;
-import eni.tp.app.eni_app.bo.Member;
+import eni.tp.app.eni_app.bll.IGenreManager;
+import eni.tp.app.eni_app.bo.Genre;
 import eni.tp.app.eni_app.bo.Movie;
-import eni.tp.app.eni_app.ihm.EniIHMHelpers;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @SessionAttributes({"loggedMember"})
 @Controller
 public class CreationMovieController {
 
+    @Autowired
+    IGenreManager genreManager;
 
     @Autowired
     ArticleManager articleManager;
@@ -30,11 +33,11 @@ public class CreationMovieController {
     public String showCreationForm(@PathVariable(required = false) Long id, Model model) {
 
         //tester si déjà connecté
-        Member loggedMember = (Member) model.getAttribute("loggedMember");
-
-        if (loggedMember == null) {
-            return "redirect:/login";
-        }
+//        Member loggedMember = (Member) model.getAttribute("loggedMember");
+//
+//        if (loggedMember == null) {
+//            return "redirect:/login";
+//        }
 
         //Préparer ce que tu vas envoyer dans le formualire par défaut
         Movie movie = new Movie();
@@ -51,6 +54,10 @@ public class CreationMovieController {
         //pour le mettre dans le formulaire
         model.addAttribute("movie", movie);
 
+        //Envoyer les catégories à la vue pour les afficher dans la liste déroulante
+        List<Genre> genres = genreManager.getGenres();
+        model.addAttribute("genres", genres);
+
         //Afficher la page formulaire
         return "creation";
     }
@@ -60,6 +67,8 @@ public class CreationMovieController {
 
     @PostMapping("creation")
     public String creationForm(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+
+        System.out.println("voici le film :" + movie);
 
         //Obectif tester la validité de la donnée (ontrôle de surface)
         if (bindingResult.hasErrors()) {

@@ -1,4 +1,4 @@
-package eni.tp.app.eni_app;
+package eni.tp.app.eni_app.ihm;
 
 import eni.tp.app.eni_app.bll.ArticleManager;
 import eni.tp.app.eni_app.bo.Movie;
@@ -55,6 +55,11 @@ public class DemoController {
     @GetMapping("home")
     public String homeWeb(){
 
+        return "hello-page" ;
+    }
+
+    @GetMapping("/")
+    public String home(){
         return "hello-page" ;
     }
 

@@ -1,10 +1,12 @@
-package eni.tp.app.eni_app.dao;
+package eni.tp.app.eni_app.dao.movies;
 
 import eni.tp.app.eni_app.bo.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
@@ -15,6 +17,8 @@ import java.util.List;
 @Component
 public class DAOMySQL implements IDAOMovie {
 
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -76,10 +80,31 @@ public class DAOMySQL implements IDAOMovie {
 //
         }
 
+//        //Insérer en base un aliment
+//        jdbcTemplate.update("INSERT INTO movie(id, title, note, year, duration, synopsis, photo ) VALUES (?,?," +
+//                        "?,?,?,?,?)", movie.id, movie.title, movie.note, movie.year, movie.duration,
+//                movie.synopsis, movie.photo);
+
+        String sql = "INSERT INTO movie (id,title,note,year,duration,synopsis,photo,id_genre) VALUES (:idMovie,:titleMovie,:noteMovie," +
+                ":yearMovie, :durationMovie, :synopsisMovie, :photoMovie, :idgen)";
+
+        //On renseigne les paramètres attendus dans la requête
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("idMovie", movie.getId());
+        mapSqlParameterSource.addValue("titleMovie", movie.getTitle());
+        mapSqlParameterSource.addValue("noteMovie", movie.getNote());
+        mapSqlParameterSource.addValue("yearMovie", movie.getYear());
+        mapSqlParameterSource.addValue("durationMovie", movie.getDuration());
+        mapSqlParameterSource.addValue("synopsisMovie", movie.getSynopsis());
+        mapSqlParameterSource.addValue("photoMovie", movie.getPhoto());
+        mapSqlParameterSource.addValue("idgen",movie.getGenre().getId()) ;
+
+
         //Insérer en base un aliment
-        jdbcTemplate.update("INSERT INTO movie(id, title, note, year, duration, synopsis, photo ) VALUES (?,?," +
-                        "?,?,?,?,?)", movie.id, movie.title, movie.note, movie.year, movie.duration,
-                movie.synopsis, movie.photo);
+//        jdbcTemplate.update("INSERT INTO aliment(id, name, id_category ) VALUES (:idAliment, :nameAliment, :idCategory)", aliment.id, aliment.name);
+
+        //Insérer en base un aliment
+        namedParameterJdbcTemplate.update(sql, mapSqlParameterSource);
 
     }
 }

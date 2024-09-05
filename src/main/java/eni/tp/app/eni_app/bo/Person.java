@@ -1,7 +1,15 @@
 package eni.tp.app.eni_app.bo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public abstract class Person {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
     public String firstname;
     public String lastname;

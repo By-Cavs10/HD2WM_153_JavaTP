@@ -1,7 +1,8 @@
-package eni.tp.app.eni_app.dao;
+package eni.tp.app.eni_app.dao.members;
 
 import eni.tp.app.eni_app.bo.Member;
-import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 
 public interface IDAOAuth {
@@ -15,4 +16,14 @@ public interface IDAOAuth {
      */
 
     Member login (String email, String password);
+
+    List<Member> selectMovie();
+
+    List<Member> selectMember();
+
+    Member selectMemberById(long id);
+
+    void saveMember(Member member);
+
+    void deleteById(Member member);
 }
